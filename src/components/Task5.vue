@@ -46,6 +46,7 @@
               :items="trips"
               @click:row="showDetails"
             >
+              <!-- eslint-disable -->
               <template v-slot:item.destinations="{ item }">
                 <span
                   v-for="(subItem, index) in item.destinations"

@@ -51,6 +51,18 @@
         />
       </v-col>
     </v-row>
+    <v-alert
+      dense
+      outlined
+      type="error"
+      v-model="showError"
+      dismissible
+      text
+      transition="scale-transition"
+      class="mt-3"
+    >
+      {{ errorText }}
+    </v-alert>
   </v-container>
 </template>
 
@@ -62,14 +74,22 @@ export default {
       firstName: "",
       lastName: "",
       savedUsers: [],
+      showError: false,
+      errorText: "",
     };
   },
   methods: {
     save() {
-      if (!this.firstName || !this.lastName) {
-        alert("First name and last name are required!");
+      if (!this.firstName) {
+        this.showError = true;
+        this.errorText = "First name is required!";
+        return;
+      } else if (!this.lastName) {
+        this.showError = true;
+        this.errorText = "Last name is required!";
         return;
       }
+      this.warning = false;
       let temp = {};
       temp.firstName = this.firstName;
       temp.lastName = this.lastName;
