@@ -1,13 +1,8 @@
 <template>
   <!-- EDIT CODE BELOW -->
   <v-row>
-    <v-col cols="2">
-      <v-btn
-        icon
-        small
-        dark
-        color="primary"
-      >
+    <v-col cols="2" class="remove">
+      <v-btn icon small dark color="primary" @click="remove">
         <v-icon>
           mdi-minus-circle
         </v-icon>
@@ -18,7 +13,7 @@
         v-model="budgetType"
         label="Budget Type"
         :items="budgetTypes"
-        :item-text="item => item.name"
+        :item-text="(item) => item.name"
         return-object
       />
     </v-col>
@@ -35,21 +30,43 @@
 </template>
 
 <script>
-  import { loadBudgetTypes } from '@/mock.js'
+import { loadBudgetTypes } from "@/mock.js";
 
-  export default {
-    name: 'BudgetRow',
-    data () {
-      return {
-        budgetType: null,
-        budgetTypes: [],
-        amount: 0,
-      }
+export default {
+  name: "BudgetRow",
+  data() {
+    return {
+      budgetType: null,
+      budgetTypes: [],
+      amount: 0,
+    };
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true,
     },
-    created () {
-      this.budgetTypes = loadBudgetTypes()
+  },
+  created() {
+    this.budgetTypes = loadBudgetTypes();
+  },
+  methods: {
+    remove() {
+      this.$emit("remove", this.data);
     },
-    methods: {
+  },
+  watch: {
+    amount() {
+      this.$emit("changeTotal", this.data, this.amount);
     },
-  }
+  },
+};
 </script>
+
+<style scoped>
+.remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
