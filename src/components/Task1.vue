@@ -10,22 +10,27 @@
           We want to create a dynamic profile card.
 
           <div class="py-3">
-            Open the file <code>/src/components/Task1.vue</code> and modify the code below so that:
+            Open the file <code>/src/components/Task1.vue</code> and modify the
+            code below so that:
             <ol class="list-center">
               <li>
-                The user profile information (first name, last name, occupation) is hidden by default.
+                The user profile information (first name, last name, occupation)
+                is hidden by default.
               </li>
               <li>
-                When the "toggle" button is clicked, the user profile information is displayed.
+                When the "toggle" button is clicked, the user profile
+                information is displayed.
               </li>
               <li>
-                When the "toggle" button is clicked a second time, the user profile information is hidden.
+                When the "toggle" button is clicked a second time, the user
+                profile information is hidden.
               </li>
             </ol>
             Once completed, proceed to the next task.
           </div>
           <div class="text-caption">
-            Note: feel free to edit any of the component properties (data, methods, etc..)
+            Note: feel free to edit any of the component properties (data,
+            methods, etc..)
           </div>
         </div>
       </v-col>
@@ -40,12 +45,12 @@
           </v-card-title>
 
           <v-card-actions>
-            <v-btn color="primary" small text>
+            <v-btn color="primary" small text @click="toggle">
               toggle
             </v-btn>
           </v-card-actions>
 
-          <v-card-text class="mx-4">
+          <v-card-text class="mx-4" v-if="showProfile">
             <v-row no-gutters>
               <v-col cols="3">
                 <strong>First Name:</strong>
@@ -78,12 +83,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'Task1',
-    data () {
-      return {}
+export default {
+  name: "Task1",
+  data() {
+    return {
+      showProfile: false,
+    };
+  },
+  methods: {
+    toggle() {
+      this.showProfile = !this.showProfile;
     },
-    methods: {
-    },
-  }
+  },
+};
 </script>
