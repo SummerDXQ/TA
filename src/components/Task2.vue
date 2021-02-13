@@ -89,7 +89,7 @@ export default {
         this.errorText = "Last name is required!";
         return;
       }
-      this.warning = false;
+      this.showError = false;
       let temp = {};
       temp.firstName = this.firstName;
       temp.lastName = this.lastName;
