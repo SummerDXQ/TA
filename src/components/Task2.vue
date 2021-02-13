@@ -10,10 +10,12 @@
           We want to build a form to record user details.
 
           <div class="py-3">
-            Open the file <code>/src/components/Task2.vue</code> and modify the code below so that:
+            Open the file <code>/src/components/Task2.vue</code> and modify the
+            code below so that:
             <ol class="list-center">
               <li>
-                When I press on "save", the user information is saved and the form is cleared.
+                When I press on "save", the user information is saved and the
+                form is cleared.
               </li>
               <li>
                 Any saved user is displayed on the right hand side table.
@@ -22,7 +24,8 @@
             Once completed, proceed to the next task.
           </div>
           <div class="text-caption">
-            Note: feel free to edit any of the component properties (data, methods, etc..)
+            Note: feel free to edit any of the component properties (data,
+            methods, etc..)
           </div>
         </div>
       </v-col>
@@ -32,18 +35,19 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-card class="pa-4">
-          <v-text-field label="First Name" />
-          <v-text-field label="Last Name" />
-          <v-btn color="primary">Save</v-btn>
+          <v-text-field label="First Name" v-model="firstName" />
+          <v-text-field label="Last Name" v-model="lastName" />
+          <v-btn color="primary" @click="save">Save</v-btn>
         </v-card>
       </v-col>
       <v-col cols="12" sm="6">
         <v-data-table
           :headers="[
-            {text: 'First Name', value: 'firstName'},
-            {text: 'Last Name', value: 'lastName'},
+            { text: 'First Name', value: 'firstName' },
+            { text: 'Last Name', value: 'lastName' },
           ]"
           hide-default-footer
+          :items="savedUsers"
         />
       </v-col>
     </v-row>
@@ -51,12 +55,28 @@
 </template>
 
 <script>
-  export default {
-    name: 'Task2',
-    data () {
-      return {}
+export default {
+  name: "Task2",
+  data() {
+    return {
+      firstName: "",
+      lastName: "",
+      savedUsers: [],
+    };
+  },
+  methods: {
+    save() {
+      if (!this.firstName || !this.lastName) {
+        alert("First name and last name are required!");
+        return;
+      }
+      let temp = {};
+      temp.firstName = this.firstName;
+      temp.lastName = this.lastName;
+      this.savedUsers.push(temp);
+      this.firstName = "";
+      this.lastName = "";
     },
-    methods: {
-    },
-  }
+  },
+};
 </script>
